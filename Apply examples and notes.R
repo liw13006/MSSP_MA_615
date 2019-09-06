@@ -45,8 +45,6 @@ apply(norm_a,2,pos_wt)
 
 
 
-
-
 ###   tapply
 
 state <- c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", "wa",
@@ -67,9 +65,9 @@ length(state)
 length(incomes)
 
 statef <- factor(state)
-
+incomesf = factor(incomes)
 tapply(incomes, statef, length)
-
+tapply(state,incomesf,length)
 
 count(incomes)
 
