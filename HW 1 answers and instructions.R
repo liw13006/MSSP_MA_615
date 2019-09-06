@@ -39,7 +39,10 @@ A_inv <- solve(A)
 
 AA <- A%*%A_inv
 
+## regulate scientific notation and floating digits
 options(scipen=999, digits = 2)
+
+
 round(AA,digits = 1)
 
 A_inv%*%b
