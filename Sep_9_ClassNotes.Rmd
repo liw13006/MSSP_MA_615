@@ -9,27 +9,36 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-```{R chunk1}
-summary(mtcars)
+
+## MPG dataset
+### 1.load tidyverse and mpg datas
+```{R load tidyverse}
+suppressMessages(library("tidyverse"))
+MPG <- mpg
 
 ```
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-library(knitr)
-
-kable(summary(cars))
+### 2.generate class vs mpg(city and highway) tables
+```{R get table data}
+class <- MPG$class
+classf <- factor(class)
+city <- MPG$cty
+highway <- MPG$hwy
+meancty <- tapply(city,classf,mean)
+meanhwy <- tapply(highway,classf,mean)
+knitr::kable(cbind(meancty,meanhwy))
 ```
 
-## Including Plots
+### 3.generate year vs top3 citymilage its mpg
 
-You can also embed plots, for example:
+```{R get table data partii}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### 4.ggplot mpg vs lots
+```{R mpg vs blablabla}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = hwy,y = displ, shape = drv, color = class,size = year))+
+  geom_smooth(mapping = aes(x = hwy, y = displ))
+```
