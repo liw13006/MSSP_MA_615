@@ -1,8 +1,11 @@
 ---
-title: "Class Assignment: MPG tables and charts"
+title: 'Class Assignment: MPG tables and charts'
 author: "MA615"
 date: "September 9, 2019"
-output: pdf_document
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
