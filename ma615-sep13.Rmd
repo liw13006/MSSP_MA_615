@@ -1,7 +1,7 @@
 ---
 title: "Class Assignment: MPG tables and charts"
 author: "MA615"
-date: "September 9, 2019"
+date: "September 19, 2019"
 output: pdf_document
 ---
 
@@ -9,7 +9,7 @@ output: pdf_document
 library(knitr)                ## loading the entire knitr package
 library(tidyverse)              ## the only tidyverse library you need is ggplot2
 library(esquisse)             ## use esquisse to setup the basic plots
-
+knitr::opts_chunk$set(fig.pos = 'H')
 library(kableExtra)
 library(magrittr)
 opts_chunk$set(echo = TRUE)
@@ -22,147 +22,63 @@ Using the MPG dataset, which is available with the ggplot2 library, produce a do
 Tables should include a comparison of city and highway mileage by the class of car and the best three car models for city and highway mileage for all the years in which data is available.  
 
 Plot the data displaying as much of the data as you can. Put continuous variables on the axes and include a locally smoothed regression line to show the relationship with mileage.  Also make a box plot comparing city and highway MPG by class of car.  
-
+\newpage
 
 ## Tables
 
-This example is flawed even though the code works.  Explain.
-And now that you know how to produce the table can you improve the code 
-by using an **apply** functional?
-
-
-```{r}
-
+```{r,echo = FALSE,fig.pos='H'}
 data(mpg)     ## load the data
-
 mpg$cyl <- as.factor(mpg$cyl)   ## convert discrete variables to factors so that they plot
 mpg$drv <- as.factor(mpg$drv)   ## as different colors, not gradations of one color
-
 mpg$cty <- as.double(mpg$cty)
 
-## dplyr code trunk
-##---
+
 mpg_1 <- select(mpg, cty, hwy, class) %>% group_by(class) %>% summarise(City=mean(cty),Highway = mean(hwy)) %>% arrange(class,Highway,City)
 kable(mpg_1,format = "latex", booktabs=TRUE, digits = 2,     ## call kable to make the table
       col.names = c("Class", "City", "Highway"), 
       caption = "Mean City and Highway MPG by Car Class")
-##---
-##
-
-
-
-
 
 
 ```
+```{r,echo = FALSE,fig.pos = 'H'}
+years = unique(mpg$year)
 
+mpg_2 <- select(mpg,cty,hwy,model,year) %>% filter(year == years[1]) %>% group_by(model) %>% summarise(City = mean(cty),Highway = mean(hwy)) %>% arrange(model,City,Highway)
+mpg_3 <- select(mpg,cty,hwy,model,year) %>% filter(year == years[2]) %>% group_by(model) %>% summarise(City = mean(cty),Highway = mean(hwy)) %>% arrange(model,City,Highway)
 
-The next table is a bit tricky. 
+cty1999 <- select(mpg_2,model,City)%>%arrange(desc(City))%>%top_n(n = 3,City)
+hwy1999 <- select(mpg_2,model,Highway)%>%arrange(desc(Highway))%>%top_n(n = 3,Highway)
 
+cty2008 <- select(mpg_3,model,City)%>%arrange(desc(City))%>%top_n(n = 3,City)
 
+hwy2008 <- select(mpg_3,model,Highway)%>%arrange(desc(Highway))%>%top_n(n = 3,Highway)
 
-```{r}
-
-##  You probably want to get started with a little investigation. 
-##  Using unique(mpg$year), you find out that there are only two years - 1999, 2008.
-
-
-mod_99 <- unique(mpg$model[mpg$year=='1999'])  ## vector of models in 1999
-
-mod_08 <- unique(mpg$model[mpg$year=='2008'])  ## vector of models in 2008
- 
-
-mod_99_cty_mean <- rep(0, length(mod_99))    ## setup vector for 1999 cty mileage means
-mod_08_cty_mean <- rep(0, length(mod_08))    ## setup vector for 2008 cty mileage means
-mod_99_hwy_mean <- rep(0, length(mod_99))    ## setup vector for 1999 hwy mileage means
-mod_08_hwy_mean <- rep(0, length(mod_08))    ## setup vector for 2008 hwy mileage means
-
-for(i in 1:length(mod_99)){
-  
- mod_99_cty_mean[i] = 
-   mean(mpg$cty[mpg$year=='1999' & mpg$model == mod_99[i]])   
-  
- mod_08_cty_mean[i] = 
-   mean(mpg$cty[mpg$year=='2008' & mpg$model == mod_08[i]])
- 
- ###
- mod_99_hwy_mean[i] = 
-   mean(mpg$hwy[mpg$year=='1999' & mpg$model == mod_99[i]])   
-  
- mod_08_hwy_mean[i] = 
-   mean(mpg$hwy[mpg$year=='2008' & mpg$model == mod_08[i]])
- 
-   }
-
-
-ind_srt_99_cty <- order(mod_99_cty_mean)
-miles_cty_99 <- rev(mod_99_cty_mean[ind_srt_99_cty])
-mod_cty_99 <- rev(mod_99[ind_srt_99_cty])
-
-
-ind_srt_08_cty <- order(mod_08_cty_mean)
-miles_cty_08 <- rev(mod_08_cty_mean[ind_srt_08_cty])
-mod_cty_08 <- rev(mod_08[ind_srt_08_cty])
-
-
-ind_srt_99_hwy <- order(mod_99_hwy_mean)
-miles_hwy_99 <- rev(mod_99_hwy_mean[ind_srt_99_hwy])
-mod_hwy_99 <- rev(mod_99[ind_srt_99_hwy])
-
-
-ind_srt_08_hwy <- order(mod_08_hwy_mean)
-miles_hwy_08 <- rev(mod_08_hwy_mean[ind_srt_08_hwy])
-mod_hwy_08 <- rev(mod_08[ind_srt_08_hwy])
-
-
-
-
-
-miles_cty_08 <- round(miles_cty_08, 2)
-miles_cty_99 <- round(miles_cty_99, 2)
-
-miles_hwy_08 <- round(miles_hwy_08, 2)
-miles_hwy_99 <- round(miles_hwy_99, 2)
-
-
-
-tbl_2 <- cbind(mod_cty_99[1:3], 
-               miles_cty_99[1:3],
-               mod_hwy_99[1:3],
-               miles_hwy_99[1:3],
-               mod_cty_08[1:3], 
-               miles_cty_08[1:3],
-               mod_hwy_08[1:3],
-               miles_hwy_08[1:3])
-
+tbl_2 <- cbind(cty1999,
+               hwy1999,
+               cty2008,
+               hwy2008)
 colnames(tbl_2) <- c('Model', 'Milage', 
                      "Model", "Milage",
                      'Model', 'Milage',
                      "Model", "Milage"
                      )
-
-kable(tbl_2, digits = 2, format = "latex", booktabs=TRUE, ,caption = "Top 3 MPG Performing Cars: 1999, 2008") %>% kable_styling() %>%
+kable(tbl_2, digits = 2, format = "latex", booktabs=TRUE ,caption = "Top 3 MPG Performing Cars: 1999, 2008") %>% kable_styling() %>%
   add_header_above(c("City 1999"=2, 
                      "Highway 1999"=2,
                      "City 2008"=2,
                    "Highway 2008"=2))
-
+#View(mpg_2)
 ```
 
 
+\newpage
 
+```{r,echo=FALSE}
 
-```{r}
-
-
-
-
-
-library(ggplot2)
 
 ggplot(mpg) +
  aes(x = displ, y = cty) +
- geom_point(aes(color=class),size=2) + geom_smooth() +
+ geom_point(aes(color=class),size=2,show.legend = F) + geom_smooth(method = 'loess',show.legend = F) +
  scale_color_hue() +
  theme_minimal(base_size = 16) +
  facet_wrap(vars(year)) + 
@@ -172,7 +88,7 @@ ggplot(mpg) +
  
  ggplot(mpg) +
  aes(x = displ, y = hwy) +
- geom_point(aes(color=class),size=2) + geom_smooth() +
+ geom_point(aes(color=class),size=2,show.legend = F) + geom_smooth(method = 'loess',show.legend = F) +
  scale_color_hue() +
  theme_minimal(base_size = 16) +
  facet_wrap(vars(year)) + 
@@ -183,13 +99,10 @@ ggplot(mpg) +
 ##esquisser(mpg)
 
 ```
-
+\newpage
 Boxplots
 
-```{r}
-
-
-
+```{r,echo=FALSE}
 ggplot(mpg) +
  aes(x = class, y = cty) +
  geom_boxplot(fill = "#0c4c8a") +

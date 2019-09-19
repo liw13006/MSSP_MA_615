@@ -1,21 +1,20 @@
 ---
-title: 'Class Assignment: MPG tables and charts'
-author: "MA615"
-date: "September 19, 2019"
-output:
-  pdf_document: default
+title: "Presetation"
+author: "Weiling Li"
+date: "9/19/2019"
+output: ioslides_presentation
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)                ## loading the entire knitr package
 library(tidyverse)              ## the only tidyverse library you need is ggplot2
 library(esquisse)             ## use esquisse to setup the basic plots
+options("kableExtra.html.bsTable" = T)
 library(kableExtra)
 library(magrittr)
 opts_chunk$set(echo = TRUE)
 ```
-
-# Class assignment:
+## Class assignment:
 
 Using the MPG dataset, which is available with the ggplot2 library, produce a document that includes the following elements: headers, text, tables, and plots.  
 
@@ -23,13 +22,7 @@ Tables should include a comparison of city and highway mileage by the class of c
 
 Plot the data displaying as much of the data as you can. Put continuous variables on the axes and include a locally smoothed regression line to show the relationship with mileage.  Also make a box plot comparing city and highway MPG by class of car.  
 
-
-## Tables
-
-This example is flawed even though the code works.  Explain.
-And now that you know how to produce the table can you improve the code 
-by using an **apply** functional?
-
+## Tables1
 
 ```{r,echo = FALSE}
 data(mpg)     ## load the data
@@ -46,10 +39,8 @@ kable(mpg_1,format = "latex", booktabs=TRUE, digits = 2,     ## call kable to ma
 
 ```
 
----
-The next table is a bit tricky. 
+## Tables2
 
----
 ```{r,echo = FALSE}
 years = unique(mpg$year)
 
@@ -81,7 +72,37 @@ kable(tbl_2, digits = 2, format = "latex", booktabs=TRUE ,caption = "Top 3 MPG P
 ```
 
 
-Boxplots
+## ggplot1
+
+```{r,echo=FALSE}
+ggplot(mpg) +
+ aes(x = displ, y = cty) +
+ geom_point(aes(color=class),size=2,show.legend = F) + geom_smooth(method = 'loess',show.legend = F) +
+ scale_color_hue() +
+ theme_minimal(base_size = 16) +
+ facet_wrap(vars(year)) + 
+  labs(x = "Engine Displacement",y = "City Mileage" ,title = "City MPG by Class of Car: 1999, 2008")
+``` 
+
+## ggplot2
+
+```{r,echo=FALSE} 
+ 
+ ggplot(mpg) +
+ aes(x = displ, y = hwy) +
+ geom_point(aes(color=class),size=2,show.legend = F) + geom_smooth(method = 'loess',show.legend = F) +
+ scale_color_hue() +
+ theme_minimal(base_size = 16) +
+ facet_wrap(vars(year)) + 
+  labs(x = "Engine Displacement", y = "Highway Mileage", title = "Highway MPG by Class of Car: 1999, 2008")
+ 
+ 
+
+##esquisser(mpg)
+
+```
+
+## Boxplot1
 
 ```{r,echo=FALSE}
 ggplot(mpg) +
@@ -89,9 +110,23 @@ ggplot(mpg) +
  geom_boxplot(fill = "#0c4c8a") +
  theme_minimal(base_size=16) +
   labs(x = "Car Class", y = "City Mileage", title = "City MPG by Class of Car: 1999, 2008")
+```
+  
+## Boxplot2
+
+```{r,echo=FALSE}
 ggplot(mpg) +
  aes(x = class, y = hwy) +
  geom_boxplot(fill = "#0c4c8a") +
  theme_minimal(base_size=16) +
   labs(x = "Car Class", y = "Highway Mileage", title = "Highway MPG by Class of Car: 1999, 2008")
+
+
+
+
+
 ```
+
+
+
+
