@@ -1,0 +1,19 @@
+---
+title: "Sep_20_submission"
+author: "Weiling Li"
+date: "9/19/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)                ## loading the entire knitr package
+library(tidyverse)              ####### change# load tidyverse
+library(esquisse)             ## use esquisse to setup the basic plots
+
+library(kableExtra)
+library(magrittr)
+```
+
+\hspace{4ex}Modern Bayesian practice uses various strategies to construct an appropriate "prior" $g(\mu)$ in the absense of prior experience, leaving many statisticians unconvinced by the resulting Bayesian inferences. Our second example illustrates the difficulty.
+
