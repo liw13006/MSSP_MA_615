@@ -1,25 +1,23 @@
 ---
 header-includes:
-- \usepackage[fontsize=16pt]{scrextend}
+- \usepackage[fontsize=14pt]{scrextend}
 indent: true
 output: 
   pdf_document:
     latex_engine: xelatex
-
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(knitr)                ## loading the entire knitr package
 library(tidyverse)              ####### change# load tidyverse
 library(esquisse)             ## use esquisse to setup the basic plots
-
 library(kableExtra)
 library(magrittr)
 ```
-
+\definecolor{teal1}{RGB}{81,108,91}
 \definecolor{mygray}{gray}{.1}
 \fontsize{10}{20}
-\setlength{\leftskip}{8pt}
+\setlength{\leftskip}{9pt}
 \textcolor{mygray}{Extract From: }
 
 \textcolor{mygray}{Bradley Efron and Trevor Hastie}  
@@ -28,16 +26,66 @@ library(magrittr)
 
 \textcolor{mygray}{ \textit{Cambridge University Press, 2016}}  
 
-*https://web.stanford.edu/~hastie/CASI_files/PDF/casi.pdf*
+*https://web.stanford.edu/~hastie/CASI_files/PDF/casi.pdf*  
 
 \setlength{\leftskip}{0pt} 
-\fontsize{16}{20}  
-\vspace{2.5cm}
+\fontsize{14}{20}  
+\vspace{2cm}  
 
-Modern Bayesian practice uses various strategies to construct an appropriate "prior" $g(\mu)$ in the absense of prior experience, leaving many statisticians unconvinced by the resulting Bayesian inferences. Our second example illustrates the difficulty.
-
-```{r, include=FALSE}
+Modern Bayesian practice uses various strategies to construct an appropriate "prior" $g(\mu)$ in the absense of prior experience, leaving many statisticians unconvinced by the resulting Bayesian inferences. Our second example illustrates the difficulty.  
+\newline
+```{r, echo=FALSE,include=FALSE}
 mechanics <- c(7,44,49,59,34,46,0,32,49,52,44,36,42,5,22,18,41,48,31,42,46,63)
 vectors <- c(51,69,41,70,42,40,40,45,57,64,61,59,60,30,57,51,63,38,42,69,49,63)
 
+m_1 <- mechanics[1:11]
+m_2 <- mechanics[-1:-11]
+v_1 <- vectors[1:11]
+v_2 <- vectors[-1:-11]
+
+t1 = cbind(m_1,v_1)
+colnames(t1) = c("mechanics","vectors")
+rownames(t1) = seq(1,11,1)
+t2 = cbind(m_2,v_2)
+colnames(t2) = c("mechanics","vectors")
+rownames(t2) = seq(12,22,1)
+#kable(t(t1),format = "latex",booktabs = TRUE)
+
+#t = cbind(mechanics,vectors)
+#rownames(t) = seq(1,22,1)
+kable(t(t1),format = "latex",booktabs = TRUE,caption = "Scores from two tests taken by 22 students, mechanics
+and vectors.")%>%
+  kable_styling(latex_options = 'hold_position')%>%
+  column_spec(1,bold = T, color = 'green')
+kable(t(t2),format = 'latex',booktabs = T)%>%
+  kable_styling(latex_options = 'hold_position')%>%
+  column_spec(1,bold = T, color = 'green')
 ```
+\textcolor{blue}{\textbf{Table 3.1}}  *Scores from two tests taken by 22 students,* \textcolor{teal1}{\textbf{mechanics}} *and* \textcolor{teal1}{\textbf{vectors}}
+\newline
+\begin{center}
+\begin{tabular}{llllllllllll}
+          & 1  & 2  & 3  & 4  & 5  & 6  & 7  & 8  & 9  & 10 & 11  \\ 
+\hline
+\textcolor{teal1}{\textbf{mechanics}} & 7  & 44 & 49 & 59 & 34 & 46 & 0  & 32 & 49 & 52 & 44  \\
+\textcolor{teal1}{\textbf{vectors}}   & 51 & 69 & 41 & 70 & 42 & 40 & 40 & 45 & 57 & 64 & 61  \\ 
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{llllllllllll}
+          & 12  & 13  & 14  & 15  & 16  & 17  & 18  & 19  & 20  & 21 & 22  \\ 
+\hline
+\textcolor{teal1}{\textbf{mechanics}} & 36  & 42 & 5 & 22 & 18 & 41 & 48  & 31 & 42 & 46 & 63  \\
+\textcolor{teal1}{\textbf{vectors}}   & 59 & 60 & 30 & 58 & 51 & 63 & 38 & 42 & 69 & 49 & 63  \\ 
+\hline
+\end{tabular}
+\end{center}  
+
+Table 3.1 shows the scores on two tests, \textcolor{teal1}{\textbf{mechanics}} and \textcolor{teal1}{\textbf{vectors}},
+achieved by $n=22$ students. The sample correlation coefficient between
+the two scores is $\hat{\theta} = 0.498$, 
+
+$$\hat{\theta} =\sum_{i = 1}^{22}(m_i - \bar{m})(v_i - \bar{v}) \bigg{/}  \left[ \sum_{i = 1}^{22}(m_i - \bar{m})^2\sum_{i = 1}^{22}(v_i - \bar{v})^2 \right]$$
+with $m$ and $v$ short for \textcolor{teal1}{\textbf{mechanics}} and \textcolor{teal1}{\textbf{vectors}}, $\bar{m}$ and $\bar{n}$ their average ages.
