@@ -1,10 +1,12 @@
 ---
-title: "Sep_20_submission"
-author: "Weiling Li"
-date: "9/19/2019"
-output: pdf_document
----
+header-includes:
+- \usepackage[fontsize=16pt]{scrextend}
+indent: true
+output: 
+  pdf_document:
+    latex_engine: xelatex
 
+---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(knitr)                ## loading the entire knitr package
@@ -15,5 +17,27 @@ library(kableExtra)
 library(magrittr)
 ```
 
-\hspace{4ex}Modern Bayesian practice uses various strategies to construct an appropriate "prior" $g(\mu)$ in the absense of prior experience, leaving many statisticians unconvinced by the resulting Bayesian inferences. Our second example illustrates the difficulty.
+\definecolor{mygray}{gray}{.1}
+\fontsize{10}{20}
+\setlength{\leftskip}{8pt}
+\textcolor{mygray}{Extract From: }
 
+\textcolor{mygray}{Bradley Efron and Trevor Hastie}  
+
+\textcolor{mygray}{ \textit{Computer Age Statistical Inference: Algorithms, Evidence and Data Science}}  
+
+\textcolor{mygray}{ \textit{Cambridge University Press, 2016}}  
+
+*https://web.stanford.edu/~hastie/CASI_files/PDF/casi.pdf*
+
+\setlength{\leftskip}{0pt} 
+\fontsize{16}{20}  
+\vspace{2.5cm}
+
+Modern Bayesian practice uses various strategies to construct an appropriate "prior" $g(\mu)$ in the absense of prior experience, leaving many statisticians unconvinced by the resulting Bayesian inferences. Our second example illustrates the difficulty.
+
+```{r, include=FALSE}
+mechanics <- c(7,44,49,59,34,46,0,32,49,52,44,36,42,5,22,18,41,48,31,42,46,63)
+vectors <- c(51,69,41,70,42,40,40,45,57,64,61,59,60,30,57,51,63,38,42,69,49,63)
+
+```
