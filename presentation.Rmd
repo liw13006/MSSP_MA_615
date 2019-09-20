@@ -2,14 +2,16 @@
 title: "Presetation"
 author: "Weiling Li"
 date: "9/19/2019"
-output: ioslides_presentation
+output: 
+  ioslides_presentation:
+    df_print: "kable"
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)                ## loading the entire knitr package
 library(tidyverse)              ## the only tidyverse library you need is ggplot2
 library(esquisse)             ## use esquisse to setup the basic plots
-options("kableExtra.html.bsTable" = T)
+
 library(kableExtra)
 library(magrittr)
 opts_chunk$set(echo = TRUE)
@@ -32,9 +34,11 @@ mpg$cty <- as.double(mpg$cty)
 
 
 mpg_1 <- select(mpg, cty, hwy, class) %>% group_by(class) %>% summarise(City=mean(cty),Highway = mean(hwy)) %>% arrange(class,Highway,City)
-kable(mpg_1,format = "latex", booktabs=TRUE, digits = 2,     ## call kable to make the table
+
+kable(mpg_1,format = "html", booktabs=TRUE, digits = 2,     ## call kable to make the table
       col.names = c("Class", "City", "Highway"), 
-      caption = "Mean City and Highway MPG by Car Class")
+      caption = "Mean City and Highway MPG by Car Class",align = 'c')%>%
+  kable_styling(position = "center",font_size = 14)
 
 
 ```
@@ -63,11 +67,11 @@ colnames(tbl_2) <- c('Model', 'Milage',
                      'Model', 'Milage',
                      "Model", "Milage"
                      )
-kable(tbl_2, digits = 2, format = "latex", booktabs=TRUE ,caption = "Top 3 MPG Performing Cars: 1999, 2008") %>% kable_styling() %>%
+kable(tbl_2, digits = 2, format = "html", booktabs=TRUE ,caption = "Top 3 MPG Performing Cars: 1999, 2008",align = "c") %>% kable_styling() %>%
   add_header_above(c("City 1999"=2, 
                      "Highway 1999"=2,
                      "City 2008"=2,
-                   "Highway 2008"=2))
+                   "Highway 2008"=2))%>%kable_styling(font_size = 12)
 #View(mpg_2)
 ```
 
