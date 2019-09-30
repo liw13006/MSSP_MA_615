@@ -1,0 +1,296 @@
+---
+title: "Regex in R"
+author: "MA615"
+date: "Fall 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE, echo=TRUE}
+library(knitr)
+opts_chunk$set(echo = TRUE)
+
+```
+
+
+
+
+
+
+## Getting started {.smaller}
+
+Libraries and files for this class
+
+```{r echo=TRUE, warning=FALSE, error=FALSE, message=FALSE}
+
+library(tidyverse)   ## see https://www.tidyverse.org/
+
+library(gapminder)   ## see https://www.gapminder.org/ and
+                     ## https://cran.r-project.org/web/packages/gapminder/index.html
+
+library(magrittr)    ##  see  https://cran.r-project.org/web/packages/magrittr/
+
+
+```
+
+[rstudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+
+
+## This class ...
+
+The focus in this class is regex in R.
+
+BUT, keep in mind that regex is used in many places:
+
+-- languages -- editors -- 
+
+The are implemented in most computer languages and in many editors.
+
+
+## Regular Expressions {.smaller}
+
+Regular expressions describe patterns in strings.
+
+### Regular Expressions in R Cheatsheet
+
+   + Character Classes  
+   + Anchors  
+   + Quantifiers  
+
+### General Applications
+
+  + Detect patterns  
+  + Split strings  
+  + Locate patterns  
+  + Extract patterns  
+  + Replace patterns  
+
+## The Cheatsheet examples ...{.smaller}
+
+
+```{r}
+
+string <- c("hiphopopotamus", "Rhymenoceros", "time for bottomless lyrics")
+pattern <- "t.m"
+```
+
+### Detect Patterns
+
+```{r eval = FALSE}
+
+grep(pattern, string)
+
+grep(pattern, string, value=TRUE)
+
+grepl(pattern, string)
+
+str_detect(string, pattern)
+```
+## The Cheatsheet examples ...{.smaller}
+
+### Split a string using a pattern
+
+```{r eval=FALSE}
+strsplit(string, pattern)
+
+str_split(string, pattern)
+```
+
+### Locate patterns
+
+```{r eval=FALSE}
+regexpr(pattern, string)
+
+
+gregexpr(pattern, string)
+
+str_locate(string, pattern)
+
+str_locate_all(string, pattern)
+```
+
+## The Cheatsheet examples ...{.smaller}
+
+### Extract patterns
+```{r eval=FALSE}
+regmatches(string, regexpr(pattern, string))
+
+regmatches(string, gregexpr(pattern, string))
+
+str_extract(string, pattern)
+
+str_extract_all(string, pattern)
+
+str_extract_all(string, pattern, simplify=TRUE)
+
+str_match(string, pattern)
+
+str_match_all(string, pattern)
+```
+## The Cheatsheet examples ...{.smaller}
+
+### Replace patterns
+```{r eval=FALSE}
+replacement = "BLAH"
+
+sub(pattern, replacement, string)
+
+gsub(pattern, replacement, string)
+
+str_replace(string, pattern, replacement)
+
+str_replace_all(string, pattern, replacement)
+
+
+```
+
+
+
+
+
+
+
+
+## Searching for a file {.smaller}
+Make a list of the files in the working directory.  
+Search for files whose name includes the word "regex"  
+
+```{r echo=TRUE, eval=FALSE}
+
+files <- list.files()
+head(files)
+grep("regex", files, value=TRUE)
+grep("regex", files, value=FALSE)
+grep("regex", files, value=TRUE, invert = TRUE)
+```
+
+## Now try it with a bigger list
+
+```{r }
+files2 <- list.files("c:\\Windows")
+
+writeLines(files2,"file2.txt")
+
+file2a <- read.table("file2.txt")
+
+```
+
+start with grep -- parts of a regular expression  
+
+then variations on grep  
+
+
+
+
+
+## Now let's generate some random strings 
+
+```{r echo=TRUE}
+set.seed(2019) 
+word_maker <- function(maxletters, nwords){
+  letters = c("A","E","I","O","U","H","K","L","M","N","P","W")
+  words = rep(NULL, nwords)
+  for(i in 1:nwords){
+    words[i] = 
+      str_flatten(sample(x = letters, 
+                                  size = sample(x=1:maxletters, 
+                                                size = 1), 
+                                  replace = TRUE))
+  }
+  return(words)
+} 
+
+r_words <- word_maker(maxletters = 10, nwords = 1000)
+
+```
+
+## problems  {.smaller}
+
+### 1 
+
+how many 3 letter words are there?  
+how many unique 3 letter words are there?  
+
+### 2 
+
+how many 2 letter words are there?  
+how many unique 2 letter words are there?  
+
+### 3
+
+Is the word PAU in the list?  KAI?  
+
+
+### 4  
+
+HOW MANY WORDS BEGIN WITH "k"?  
+how many are unique?
+
+
+
+## problem 1 {.smaller}
+
+how many 3 letter words are there?
+
+let_3 <- grep("\\b[[:alpha:]]{3}\\b", r_words, value = TRUE)
+let_3a <- grep("\\b[A-Z]{3}\\b", r_words, value=TRUE)
+
+how many unique 3 letter words are there?
+
+let_3u <- unique(let_3)
+
+## problem 2 {.smaller}
+how many 2 letter words are there?
+
+let_2 <- grep("\\b[[:alpha:]]{2}\\b", r_words, value = TRUE)
+
+how many unique 2 letter words are there?
+
+let_2u <- unique(let_2)
+
+## problem 3 {.smaller}
+
+Is the word PAU in the list?  KAI?
+
+grep("PAU", r_words)
+
+grep("\\bPAU\\b", r_words)
+
+
+
+grep("KAI", r_words)
+
+grep("\\bKAI\\b", r_words)
+
+## Problem 4 {.smaller}
+
+
+HOW MANY WORDS BEGIN WITH "k"?
+
+
+k_wrd <- grep("^K", r_words, value=TRUE)
+
+how many are unique?
+k_wrd_u <- unique(k_wrd)
+
+
+
+## References
+
+[String processing in R book](https://www.gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf)
+
+
+[String Processcing in R Blog](http://www.gastonsanchez.com/visually-enforced/resources/how-to/2013/09/22/Handling-and-Processing-Strings-in-R/)
+
+
+
+[Regex Tidyverse article](https://stringr.tidyverse.org/articles/regular-expressions.html)
+
+[AWK](https://www.gnu.org/software/gawk/manual/gawk.html)
+
+
+[hex editor](https://mh-nexus.de/en/hxd/)
+
+[online books](https://bookdown.org/)
+
+[other online resources](https://rmarkdown.rstudio.com/gallery.html)
+
