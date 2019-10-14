@@ -1,4 +1,4 @@
-pacman::p_load(tidyverse,rattle,psych,GPArotation,magrittr)
+pacman::p_load(tidyverse,rattle,psych,GPArotation,magrittr,reshape2)
 ClimateRaw1 = readxl::read_xls("Climate_Change.xls",sheet = 1,na = "..",col_types = "guess")
 ClimateRaw2 = readxl::read_xls("Climate_Change.xls",sheet = 2,na = "..",col_types = "guess")
 ClimateRaw3 = readxl::read_xls("Climate_Change.xls",sheet = 3,na = "..",col_types = "guess")
@@ -75,3 +75,15 @@ ggplot(IncomePop)+geom_line(mapping = aes(x = year,y = LIC,color = "Low Income C
 ggplot(IncomeGDP)+geom_line(mapping = aes(x = year,y = LIC,color = "Low Income Countries"))+ylab("GDP by class")
 ggplot(IncomeCo2perGDP)+geom_line(mapping = aes(x = year,y = LIC,color = "Low Income Countries"))+ylab("Co2 emission per GDP")
 ggplot(IncomeCo2Tot)+geom_line(mapping = aes(x = year,y = LIC,color = "Low Income Countries"))+ylab("Total Co2 emission per class")
+
+## looks like there is some issue on total low income countries' co2 emission
+##
+## Extract low income countries
+LICcode = filter(ClimateRaw2,`Income group` == "Low income")%>%select(`Country code`)%>%pull()
+
+LICClimate = dplyr::filter(ClimateRaw1,`Country code` %in% LICcode,`Series code` %in% Relatedvariables)
+
+LICTotCo2 = filter(LICClimate,`Series code`=="EN.ATM.CO2E.KT")%>%select(`Country code`,`1990`:`2008`)%>%melt(id.vars = "Country code",variable.name = "year",value.name = "tot co2 emmision")
+
+##Turns out that PRK:People's Republic of Korea, contributed most to 
+ggplot(filter(LICTotCo2,`Country code`=="PRK"),aes(year,`tot co2 emmision`))+geom_point(aes(color=`Country code`))
