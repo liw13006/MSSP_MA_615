@@ -101,7 +101,7 @@ ppp2005 <- Climate%>%dplyr::filter(Region == "North America")%>%
     transpose_df()%>%dplyr::transmute(`North America` = BMU*pppBer + CAN * pppCan + USA)%>%
     pull()
 
-D_Temp = D_Temp%>%dplyr::mutate(CO2percap = CO2*1000/Pop,CO2perGDP = CO2*100000000/ppp2005)
+D_Temp = D_Temp%>%dplyr::mutate(CO2percap = CO2*1000/Pop,CO2perGDP = CO2*1000000000/ppp2005)
 
 # Adjust comparing variables exclude Pop growth and Urban growth. (For simplicity)
 
