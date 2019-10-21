@@ -19,6 +19,7 @@ Climate <-  dplyr::filter(ClimateRaw1,`Series code` %in% Relatedvariables)#,!`Co
 Climate <- left_join(Climate,select(ClimateRaw2,`Country code`,`Income group`,Region)) %>% melt(measure.vars = 7:28)%>%dplyr::rename(year = variable)
 
 #Data READY TO PLAY!!!
+#
 # 1st the series code explanation table:
 
 SeriesCode = ClimateRaw3%>%select(`Series code`,`Series name`,Definition)%>%dplyr::filter(`Series code` %in% Relatedvariables)
@@ -42,7 +43,7 @@ Climate%>%dplyr::filter(`Country code`%in% Incomecode,is.na(value))%>%dplyr::gro
 Climate%>%dplyr::filter(`Country code`%in% Regioncode,is.na(value))%>%dplyr::group_by(year)%>%dplyr::select(`Series code`,year,value)%>%summary()
 
 
-# 
+# Plot our data 
 print(Relatedvariables)
 p <- ggplot(Climate%>%dplyr::filter(`Series code` == Relatedvariables[7],`Country code` %in% Regioncode))+aes(x = as.numeric(as.character(year)),y = value,color = `Country name`)+geom_line()
 p
@@ -117,7 +118,6 @@ Temp_Colnames <- SeriesCode%>%dplyr::select(`Series name`)%>%pull()
 #set adequate colname order and rename the D_Temp cols
 colnames(D_Temp) <- c("year",Temp_Colnames[c(6,1:5)])
 # Transpose back
-
 D_Temp%>%column_to_rownames(var = "year")%>%transpose_df()
 colnames(D_Temp)[colnames(D_Temp)=="rowname"] <- "Series name"
 

@@ -1,0 +1,478 @@
+---
+title: "Midterm Project"
+author: "Weiling Li"
+date: "10/20/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message = FALSE,warning = FALSE)
+pacman::p_load(tidyverse,reshape2,plotly,DT,htmlwidgets,kableExtra)
+## Self-defined transpose function for tibble
+transpose_df <- function(df) {
+  t_df <- data.table::transpose(df)
+  colnames(t_df) <- rownames(df)
+  rownames(t_df) <- colnames(df)
+  t_df <- t_df %>%
+    tibble::rownames_to_column(.data = .) %>%
+    tibble::as_tibble(.)
+  return(t_df)
+}
+```
+
+# World Bank Climate Data
+
+## Load and Clean Data
+
+### Load raw data
+In the original dataset, NA value is labeled as "..".
+```{r}
+ClimateRaw1 = readxl::read_xls("Climate_Change.xls",sheet = 1,na = "..",col_types = "guess")
+ClimateRaw2 = readxl::read_xls("Climate_Change.xls",sheet = 2,na = "..",col_types = "guess")
+ClimateRaw3 = readxl::read_xls("Climate_Change.xls",sheet = 3,na = "..",col_types = "guess")
+```
+
+### Visualize raw data
+
+<iframe src="Raw1.html" height="300" width="900" style="border:none;"></iframe>
+<br />
+<br />
+<iframe src="Raw2.html" height="400" width="900" style="border:none;"></iframe>
+<br />
+<br />
+<iframe src="Raw3.html" height="400" width="900" style="border:none;"></iframe>
+<br />
+
+### Cleaning data
+
+When cleaning the datatable, there are several country code which is not actually country. Such as `LIC` represent low income countries and these rows represent an aggregated data. In order to separate these when plotting, we need to save these country codes for later use.
+<br />
+Pull out region and income codes
+```{r}
+Regioncode = dplyr::filter(ClimateRaw2,Region == "Aggregates")[-grep("income",ClimateRaw2$`Country name`),] # Both the Income and Region aggregated rows will have a "Aggregates" value in the Region column
+Regioncode = Regioncode %>% select(`Country code`) %>% pull()
+
+Incomecode = dplyr::filter(ClimateRaw2,Region == "Aggregates")[grep("income",ClimateRaw2$`Country name`),] 
+Incomecode = Incomecode %>% select(`Country code`)%>%pull()
+```
+
+There are 57 different variable observed for each country every year from 1990 to 2011(Ofcourse there are NA values,actually quite a lot. some is just missing, and some is measured every 10 years instead of every year.). After carefully examined 3rd sheet in the raw data, 9 variables are kept, they are:
+```{r}
+Relatedvariables = dplyr::select(ClimateRaw3,`Series code`) %>% 
+  slice(1:4,14:15,41:43)%>%
+  pull()
+print(Relatedvariables)
+```
+
+
+* Total Population `SP.POP.TOTL`
+* Population anual growth `SP.POP.GROW`
+* GDP `NY.GDP.MKTP.CD`
+* GNI per Capita `NY.GNI.PCAP.CD`
+* Urban Population `SP.URB.TOTL`
+* Urban Population anual growth `SP.URB.GROW`
+* CO2 Emission per Capita `EN.ATM.CO2E.PC`
+* CO2 Emission per PPP `EN.ATM.CO2E.PP.GD.KD`
+* CO2 Total Emission `EN.ATM.CO2E.KT`
+<br />
+
+Using the codes to filter original Climate data
+```{r}
+Climate <-  dplyr::filter(ClimateRaw1,`Series code` %in% Relatedvariables)
+print(summary(as.factor(Climate$`Series code`)))
+```
+<br />
+Because the second sheet of the original data contains categorical data indicating a country's income status and geographic info. Assign these to the data table using `dplyr::left_join`, and also spread the table to become longer.
+
+```{r}
+Climate <- left_join(Climate,select(ClimateRaw2,`Country code`,`Income group`,Region)) %>%
+  melt(measure.vars = 7:28)%>%
+  dplyr::rename(year = variable)
+
+kable(Climate%>%dplyr::sample_n(10,replace = FALSE))%>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "400px")
+```
+<br />
+<br />
+
+Get Series code table, Income code table as well as Region table
+
+```{r}
+SeriesCode = ClimateRaw3%>%
+  select(`Series code`,`Series name`,Definition)%>%
+  dplyr::filter(`Series code` %in% Relatedvariables)
+
+IncomeTable = ClimateRaw2%>%
+  select(`Country code`,`Country name`)%>%
+  filter(`Country code` %in% Incomecode)
+
+IncomeTable = IncomeTable[c(1,6,5,3,2,4),]# re-order it
+
+RegionTable = ClimateRaw2%>%
+  select(`Country code`,`Country name`)%>%
+  filter(`Country code` %in% Regioncode)
+
+```
+
+Check NA values in world data `WLD`, Region data and also Income group data
+
+```{r}
+Climate%>%dplyr::filter(`Country code`=="WLD",is.na(value))%>%
+  dplyr::group_by(year)%>%
+  dplyr::select(`Series code`,year,value)%>%
+  summary()
+
+Climate%>%dplyr::filter(`Country code`%in% Incomecode,is.na(value))%>%
+  dplyr::group_by(year)%>%
+  dplyr::select(`Series code`,year,value)%>%
+  summary()
+
+Climate%>%dplyr::filter(`Country code`%in% Regioncode,is.na(value))%>%
+  dplyr::group_by(year)%>%
+  dplyr::select(`Series code`,year,value)%>%
+  summary()
+```
+
+As shown above, 2011 is missing too many datas, year 2011 will be excluded from the Dataset
+
+```{r}
+Climate <- Climate%>%dplyr::filter(year != 2011)
+```
+
+check again
+
+```{r}
+Climate%>%dplyr::filter(`Country code`=="WLD",is.na(value))%>%
+  dplyr::group_by(year)%>%
+  dplyr::select(`Series code`,year,value)%>%
+  summary()
+
+Climate%>%dplyr::filter(`Country code`%in% Incomecode,is.na(value))%>%
+  dplyr::group_by(year)%>%
+  dplyr::select(`Series code`,year,value)%>%
+  summary()
+
+Climate%>%dplyr::filter(`Country code`%in% Regioncode,is.na(value))%>%
+  dplyr::group_by(year)%>%
+  dplyr::select(`Series code`,year,value)%>%
+  summary()
+```
+
+Plot our data to have a taste of what it looks like
+
+```{r}
+
+p <- ggplot(Climate%>%dplyr::filter(`Series code` == Relatedvariables[8],`Country code` %in% Regioncode))+
+  aes(x = as.numeric(as.character(year)),y = value,color = `Country name`)+
+  geom_line()+xlab("Year")+
+  ggtitle(Relatedvariables[8])
+
+plotly_build(p)%>%layout(legend = list(orientation = 'h',x = 0, y = -.3))
+```
+<br />
+<br />
+Found North America region is missing. In order to compare regions, we need to reconstruct data for North America.
+<br />
+```{r}
+dplyr::filter(ClimateRaw2,Region != "Aggregates")%>%select(Region)%>%pull()%>%unique()
+```
+
+From the dataset 3 countries are labeled in North America region: `USA`, `CAN` and `BMU`. Below are the reconstucting process.
+
+```{r}
+# Check if NAS has been occupied
+Climate%>%dplyr::filter(`Country code`=="NAS")
+# Checked
+```
+
+Calculate Total CO2 emission, Total Population, GDP and Urban population
+
+```{r}
+# Total CO2 emission
+D1 <- Climate%>%
+  dplyr::filter(Region == "North America")%>%
+  pivot_wider(names_from = year,values_from = value)%>%
+  dplyr::filter(`Series code` == Relatedvariables[9])%>%
+  dplyr::select(1:8)%>%
+  dplyr::slice(1)
+
+D1 <- D1%>%as.data.frame()
+
+D1[1,c(1:2,7:8)] = c("NAS","North America","Aggregates","Aggregates")
+
+D2 = Climate%>%
+  dplyr::filter(Region == "North America")%>%
+  pivot_wider(names_from = year,values_from = value)%>%
+  dplyr::filter(`Series code` == Relatedvariables[9])%>%summarise_at(.vars = 9:29,.funs = sum)
+D = dplyr::bind_cols(D1,D2)
+
+# Total Population
+D1 <- Climate%>%
+  dplyr::filter(Region == "North America")%>%
+  pivot_wider(names_from = year,values_from = value)%>%
+  dplyr::filter(`Series code` == Relatedvariables[1])%>%
+  dplyr::select(1:8)%>%
+  dplyr::slice(1)
+
+D1 <- D1%>%as.data.frame()
+
+D1[1,c(1:2,7:8)] = c("NAS","North America","Aggregates","Aggregates")
+
+D2 = Climate%>%
+  dplyr::filter(Region == "North America")%>%
+  pivot_wider(names_from = year,values_from = value)%>%
+  dplyr::filter(`Series code` == Relatedvariables[1])%>%
+  summarise_at(.vars = 9:29,.funs = sum)
+D <- dplyr::bind_rows(D, dplyr::bind_cols(D1,D2))
+
+# GDP
+D1 <- Climate%>%
+  dplyr::filter(Region == "North America")%>%
+  pivot_wider(names_from = year,values_from = value)%>%
+  dplyr::filter(`Series code` == Relatedvariables[3])%>%
+  dplyr::select(1:8)%>%
+  dplyr::slice(1)
+D1 <- D1%>%as.data.frame()
+
+D1[1,c(1:2,7:8)] = c("NAS","North America","Aggregates","Aggregates")
+
+D2 = Climate%>%
+  dplyr::filter(Region == "North America")%>%
+  pivot_wider(names_from = year,values_from = value)%>%
+  dplyr::filter(`Series code` == Relatedvariables[3])%>%
+  summarise_at(.vars = 9:29,.funs = sum)
+
+D <- dplyr::bind_rows(D, dplyr::bind_cols(D1,D2))
+
+# Urban Population
+D1 <- Climate%>%dplyr::filter(Region == "North America")%>%pivot_wider(names_from = year,values_from = value)%>%dplyr::filter(`Series code` == Relatedvariables[5])%>%dplyr::select(1:8)%>%dplyr::slice(1)
+D1 <- D1%>%as.data.frame()
+D1[1,c(1:2,7:8)] = c("NAS","North America","Aggregates","Aggregates")
+D2 = Climate%>%dplyr::filter(Region == "North America")%>%pivot_wider(names_from = year,values_from = value)%>%dplyr::filter(`Series code` == Relatedvariables[5])%>%summarise_at(.vars = 9:29,.funs = sum)
+D <- dplyr::bind_rows(D, dplyr::bind_cols(D1,D2))
+```
+
+Calculate CO2 per capita, CO2 per unit PPP
+Bermuda's PPP factor is missing from the world bank data, the cloest one I could find is a data given by [federal reserve bank](https://fred.stlouisfed.org/series/PLGDPEBMA670NRUG)
+
+```{r}
+pppBer <- 1.98021
+pppCan <- 1.21
+D_Temp <- D%>%dplyr::select(`Series name`,`1990`:`2010`)%>%
+  column_to_rownames(var = "Series name")%>%
+  transpose_df()
+Temp_Colnames <- colnames(D_Temp)
+colnames(D_Temp) <- c("year","CO2","Pop","GDP","Urban")
+# Calculate ppp in 2005 for North america
+ppp2005 <- Climate%>%dplyr::filter(Region == "North America")%>%
+  pivot_wider(names_from = year,values_from = value)%>%
+  dplyr::filter(`Series code` == Relatedvariables[3])%>%
+  dplyr::select(`Country code`,`2005`)%>%
+  column_to_rownames(var = "Country code")%>%
+  transpose_df()%>%dplyr::transmute(`North America` = BMU*pppBer + CAN * pppCan + USA)%>%
+  pull()
+
+D_Temp = D_Temp%>%dplyr::mutate(CO2percap = CO2*1000/Pop,CO2perGDP = CO2*1000000000/ppp2005)
+```
+
+Adjust comparing variables exclude Pop growth and Urban growth and GNI per cap. (For simplicity)
+
+```{r}
+SeriesCode <- SeriesCode%>%slice(-2,-4,-6)
+# update related Variables
+Related_variables <- SeriesCode%>%
+  dplyr::select(`Series code`)%>%
+  pull()
+
+Temp_Colnames <- SeriesCode%>%
+  dplyr::select(`Series name`)%>%
+  pull()
+#set adequate colname order and rename the D_Temp cols
+colnames(D_Temp) <- c("year",Temp_Colnames[c(6,1:5)])
+# Transpose back
+D_Temp <- D_Temp%>%column_to_rownames(var = "year")%>%transpose_df()
+colnames(D_Temp)[colnames(D_Temp)=="rowname"] <- "Series name"
+print(colnames(D_Temp))
+```
+
+Reconstruct the remaining part of climate data
+
+```{r}
+D_ = data.frame()
+
+for (i in 1:length(Related_variables)){
+  D1 <- Climate%>%
+    dplyr::filter(Region == "North America")%>%
+    pivot_wider(names_from = year,values_from = value)%>%
+    dplyr::filter(`Series code` == Related_variables[i])%>%
+    dplyr::select(1:8)%>%
+    dplyr::slice(1)
+  D1 <- D1%>%as.data.frame()
+  D1[1,c(1:2,7:8)] = c("NAS","North America","Aggregates","Aggregates")
+  D_ <- bind_rows(D_,D1)
+}
+# Combine D_ and D_Temp
+
+D <- left_join(D_,D_Temp,by = "Series name")%>%pivot_longer(cols = 9:29,names_to = "year",values_to = "value")
+```
+
+Add these to the original Climate table and we keep the related variables
+
+```{r}
+Climate <- bind_rows(Climate,D)
+Climate <- Climate%>%
+  dplyr::filter(`Series code` %in% Related_variables)
+# update Regioncode
+Regioncode <- append(Regioncode,"NAS")
+```
+
+Replot the previous plot
+
+```{r}
+p <- ggplot(Climate%>%dplyr::filter(`Series code` == Related_variables[1],`Country code` %in% Regioncode))+
+  aes(x = as.numeric(as.character(year)),y = value,color = `Country name`)+
+  geom_line()+xlab("year")+
+  ggtitle(Related_variables[1])
+
+plotly_build(p)%>%layout(legend = list(orientation = 'h',x = 0, y = -0.3))
+```
+
+Series code is not user friendly, we would use Series name instead
+
+```{r}
+SeriesName = SeriesCode%>%dplyr::select(`Series name`)%>%pull()
+```
+
+try plot
+
+```{r}
+p <- ggplot(Climate%>%dplyr::filter(`Series name` == SeriesName[1],`Country code` %in% c(Incomecode,"WLD")))+
+  aes(x = as.numeric(as.character(year)),y = value,color = `Country name`)+
+  geom_line()+
+  xlab("year")+
+  ggtitle(SeriesName[1])
+
+plotly_build(p)%>%layout(legend = list(orientation = 'h',x = 0, y = -0.2))
+
+p <- ggplot(Climate%>%dplyr::filter(`Series name` == SeriesName[2],`Country code` %in% c(Incomecode,"WLD")))+
+  aes(x = as.numeric(as.character(year)),y = value,color = `Country name`)+
+  geom_line()+
+  xlab("year")+
+  ggtitle(SeriesName[2])
+
+plotly_build(p)%>%layout(legend = list(orientation = 'h',x = 0, y = -0.2))
+
+p <- ggplot(Climate%>%dplyr::filter(`Series name` == SeriesName[3],`Country code` %in% c(Incomecode,"WLD")))+
+  aes(x = as.numeric(as.character(year)),y = value,color = `Country name`)+
+  geom_line()+
+  xlab("year")+
+  ggtitle(SeriesName[3])
+
+plotly_build(p)%>%layout(legend = list(orientation = 'h',x = 0, y = -0.2))
+
+p <- ggplot(Climate%>%dplyr::filter(`Series name` == SeriesName[4],`Country code` %in% c(Incomecode,"WLD")))+
+  aes(x = as.numeric(as.character(year)),y = value,color = `Country name`)+
+  geom_line()+
+  xlab("year")+
+  ggtitle(SeriesName[4])
+
+plotly_build(p)%>%layout(legend = list(orientation = 'h',x = 0, y = -0.2))
+
+p <- ggplot(Climate%>%dplyr::filter(`Series name` == SeriesName[5],`Country code` %in% c(Incomecode,"WLD")))+
+  aes(x = as.numeric(as.character(year)),y = value,color = `Country name`)+
+  geom_line()+
+  xlab("year")+
+  ggtitle(SeriesName[5])
+
+plotly_build(p)%>%layout(legend = list(orientation = 'h',x = 0, y = -0.2))
+
+p <- ggplot(Climate%>%dplyr::filter(`Series name` == SeriesName[6],`Country code` %in% c(Incomecode,"WLD")))+
+  aes(x = as.numeric(as.character(year)),y = value,color = `Country name`)+
+  geom_line()+
+  xlab("year")+
+  ggtitle(SeriesName[6])
+
+plotly_build(p)%>%layout(legend = list(orientation = 'h',x = 0, y = -0.2))
+```
+
+We shall see how the data is distributed
+
+```{r}
+TempD <- Climate%>%dplyr::filter(`Series name` == SeriesName[1],!`Country code` %in% Incomecode & !`Country code` %in% Regioncode,year %in% c(1992,2008))
+p1 <- ggplot(TempD)+
+  aes(x =log(value),color = `Region`,fill = `Region`)+facet_wrap(as.factor(TempD$year),nrow = 2)+
+  geom_histogram(bins = 30,aes(y = ..density..),position = "dodge",alpha = .2)+
+  geom_density(alpha = .3)+ylab("year")+
+  xlab(paste0("log ",SeriesName[1]))
+
+plotly_build(p1)#%>%layout(legend = list(orientation = 'h',x = 0, y = -0.2))
+
+TempD <- Climate%>%dplyr::filter(`Series name` == SeriesName[2],!`Country code` %in% Incomecode & !`Country code` %in% Regioncode,year %in% c(1992,2008))
+p1 <- ggplot(TempD)+
+  aes(x =log(value),color = `Region`,fill = `Region`)+facet_wrap(as.factor(TempD$year),nrow = 2)+
+  geom_histogram(bins = 30,aes(y = ..density..),position = "dodge",alpha = .2)+
+  geom_density(alpha = .3)+ylab("year")+
+  xlab(paste0("log ",SeriesName[2]))
+
+plotly_build(p1)
+
+TempD <- Climate%>%dplyr::filter(`Series name` == SeriesName[3],!`Country code` %in% Incomecode & !`Country code` %in% Regioncode,year %in% c(1992,2008))
+p1 <- ggplot(TempD)+
+  aes(x =log(value),color = `Region`,fill = `Region`)+facet_wrap(as.factor(TempD$year),nrow = 2)+
+  geom_histogram(bins = 30,aes(y = ..density..),position = "dodge",alpha = .2)+
+  geom_density(alpha = .3)+ylab("year")+
+  xlab(paste0("log ",SeriesName[3]))
+
+plotly_build(p1)
+
+TempD <- Climate%>%dplyr::filter(`Series name` == SeriesName[4],!`Country code` %in% Incomecode & !`Country code` %in% Regioncode,year %in% c(1992,2008))
+p1 <- ggplot(TempD)+
+  aes(x =log(value),color = `Region`,fill = `Region`)+facet_wrap(as.factor(TempD$year),nrow = 2)+
+  geom_histogram(bins = 30,aes(y = ..density..),position = "dodge",alpha = .2)+
+  geom_density(alpha = .3)+ylab("year")+
+  xlab(paste0("log ",SeriesName[4]))
+
+plotly_build(p1)
+
+TempD <- Climate%>%dplyr::filter(`Series name` == SeriesName[5],!`Country code` %in% Incomecode & !`Country code` %in% Regioncode,year %in% c(1992,2008))
+p1 <- ggplot(TempD)+
+  aes(x =log(value),color = `Region`,fill = `Region`)+facet_wrap(as.factor(TempD$year),nrow = 2)+
+  geom_histogram(bins = 30,aes(y = ..density..),position = "dodge",alpha = .2)+
+  geom_density(alpha = .3)+ylab("year")+
+  xlab(paste0("log ",SeriesName[5]))
+
+plotly_build(p1)
+
+TempD <- Climate%>%dplyr::filter(`Series name` == SeriesName[6],!`Country code` %in% Incomecode & !`Country code` %in% Regioncode,year %in% c(1992,2008))
+p1 <- ggplot(TempD)+
+  aes(x =log(value),color = `Region`,fill = `Region`)+facet_wrap(as.factor(TempD$year),nrow = 2)+
+  geom_histogram(bins = 30,aes(y = ..density..),position = "dodge",alpha = .2)+
+  geom_density(alpha = .3)+ylab("year")+
+  xlab(paste0("log ",SeriesName[6]))
+
+plotly_build(p1)
+```
+
+try pivot series code,log all input
+
+```{r}
+Climate1 <- Climate%>%
+  dplyr::select(1:3,7:10)%>%
+  pivot_wider(names_from = `Series code`,values_from = value)%>%
+  dplyr::mutate_at(.vars = 6:11,.funs = log)
+
+TempD <- Climate1%>%dplyr::filter(!`Country code` %in% Incomecode & !`Country code` %in% Regioncode,year ==2005 )
+
+p3 <- ggplot(TempD)+aes(y = `EN.ATM.CO2E.KT`,x = `SP.POP.TOTL`)+geom_point(aes(size = `NY.GDP.MKTP.CD`,color = `Income group`))+scale_size_continuous(range = c(0,4))+xlab("Total Population, size = GDP")+ylab("Total CO2 Emission")
+
+plotly_build(p3)%>%layout(legend = list(orientation = 'h',x = 0, y = -0.3))
+
+TempD <- Climate1%>%dplyr::filter(!`Country code` %in% Incomecode & !`Country code` %in% Regioncode,year ==2005 )
+
+p3 <- ggplot(TempD)+aes(y = `EN.ATM.CO2E.PC`,x = `SP.POP.TOTL`)+geom_point(aes(size = `NY.GDP.MKTP.CD`,color = `Income group`))+scale_size_continuous(range = c(0,4))+xlab("Total Population, size = GDP")+ylab("Total CO2 Emission per Cap")
+
+plotly_build(p3)%>%layout(legend = list(orientation = 'h',x = 0, y = -0.3))
+```
+
+Speculation: Higher GDP, Higher income is related to higher
