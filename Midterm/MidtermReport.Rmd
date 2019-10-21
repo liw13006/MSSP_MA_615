@@ -475,4 +475,6 @@ p3 <- ggplot(TempD)+aes(y = `EN.ATM.CO2E.PC`,x = `SP.POP.TOTL`)+geom_point(aes(s
 plotly_build(p3)%>%layout(legend = list(orientation = 'h',x = 0, y = -0.3))
 ```
 
-Speculation: Higher GDP, Higher income is related to higher
+*Speculation: Higher GDP, Higher income is related to higher CO2 emmision per capita. Also Higher population intrinsicly produces more CO2*
+<br />
+Detailed associations between variables can be determined by modeling
