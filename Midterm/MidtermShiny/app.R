@@ -188,7 +188,7 @@ ui <- fluidPage(tabsetPanel(
     tabPanel("Plot Variables as scatter plot",
              titlePanel("Interactions between variables"),
              flowLayout(
-                      selectInput("year",label = "Year Interested",choices = 1992:2008)
+                      selectInput("year",label = "Year Interested",choices = 1990:2010)
                       
                       ),
              splitLayout(
@@ -229,7 +229,7 @@ server <- function(input, output) {
         p3 <- ggplot(DF2())+
             aes(y = `EN.ATM.CO2E.KT`,x = `SP.POP.TOTL`)+
             geom_point(aes(size = `NY.GDP.MKTP.CD`,color = `Income group`))+
-            scale_size_continuous(range = c(0,4))+
+            scale_size_continuous(range = c(-1,4))+
             xlab("Total Population, size = GDP")+
             ylab("Total CO2 Emission")+
             ggtitle(paste0("year of ",input$year))
@@ -243,7 +243,7 @@ server <- function(input, output) {
         p4 <- ggplot(DF2())+
             aes(y = `EN.ATM.CO2E.PC`,x = `SP.POP.TOTL`)+
             geom_point(aes(size = `NY.GDP.MKTP.CD`,color = `Income group`))+
-            scale_size_continuous(range = c(0,4))+
+            scale_size_continuous(range = c(-1,4))+
             xlab("Total Population, size = GDP")+
             ylab("Total CO2 Emission per CAP")+
             ggtitle(paste0("year of ",input$year))
