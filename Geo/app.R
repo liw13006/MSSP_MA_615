@@ -42,7 +42,7 @@ ui <- fluidPage(
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-            selectizeInput("zone","Please select zones",unique(Parking_Meters$BLK_NO),multiple = TRUE,options = list(maxOptions = 5))
+            selectInput("zone","Please select zones",unique(Parking_Meters$BLK_NO),multiple = TRUE)
         ),
 
         # Show a plot of the generated distribution
@@ -80,7 +80,7 @@ server <- function(input, output) {
             addPolygons(data=MA, group="States", weight=2, fillOpacity = 0) %>%
             addScaleBar(position = "bottomleft") %>%
             addLayersControl(
-                baseGroups = c("Map", "Satellite", "Mapnik"),
+                baseGroups = c("Mapnik","Map", "Satellite" ),
                 overlayGroups = c("Meter", "States"),
                 options = layersControlOptions(collapsed = TRUE)
             )
