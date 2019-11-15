@@ -1,0 +1,204 @@
+---
+title: "Spark_Tutorial_Class_2"
+author: "Albert Ding"
+date: "November 15, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In the last class, I introduced some concepts related to big data and Spark. We installed Spark and Sparklyr and hopefully we all have that working now. We also saw that dplyr and SQL both have native functionality with Sparklyr.
+
+```{r}
+library(sparklyr)
+library(dplyr)
+library(DBI)
+library(ggplot2)
+library(dbplot)
+
+sparkversion <- spark_installed_versions()$spark
+
+sc <- spark_connect(master = "local", version = sparkversion)
+
+cars <- copy_to(sc, mtcars)
+
+```
+
+
+For plotting, the dbplot package provides helper functions for plotting with remote data. The R code dbplot that's used to transform the data is written so that it can be translated in Spark and then the results to create a graph using ggplot2 package where transformations and plotting are both triggered by a single function
+
+```{r}
+cars %>%
+dbplot_histogram(mpg, binwidth = 3) +
+labs(title = "MPG Distribution",
+     subtitle = "Histogram over miles per gallon")
+ 
+```
+
+
+
+We may also use a raster plot in case a scatterplot becomes infeasible due to the number of points. Because we are ultimately plotting the graphics back in R, there's no way around this issue with sparklyr: 
+
+```{r}
+dbplot_raster(cars, mpg, wt, resolution = 5) +
+  labs(title = "Weight versus MPG Rasterplot\n") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+```{r}
+cars %>%
+  dbplot_line(disp) +
+  labs(title = "Nonsensical Line Plot\n") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+```{r}
+cars %>%
+  dbplot_boxplot(cyl, mpg) + 
+  labs(title = "MPG by Cylinders Box Plot\n") +
+  theme(plot.title = element_text(hjust = 0.5)) 
+```
+
+
+The examples so far are built using a very small dataset but in a real-life scenario, it would be a good idea to save results of all transformation in a new table loaded in Spark memory. The compute() command can take the end of a dplyr command and save the results to Spark memory
+
+```{r}
+cached_cars <- cars %>% 
+  compute("cached_cars")
+```
+
+We can then take the saved results and fit a model with that
+
+```{r}
+cached_cars %>%
+  ml_linear_regression(mpg ~ .) %>%
+  summary
+
+cached_cars %>%
+  dbplot_boxplot(cyl, mpg) + 
+  labs(title = "MPG by Cylinders Box Plot\n") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+```
+
+Let's take a look at transformers now. Recall that a transformer is used to apply transformations to a Dataframe and returns another Dataframe. For instance, consider the following example to illustrate the relationship of centering and scaling data to prepare it for modeling:
+
+```{r}
+scaler <- ft_standard_scaler(
+  sc,
+  input_col = "features",
+  output_col = "features_scaled",
+  with_mean = TRUE)
+
+scaler
+
+```
+
+We can now create some data, for which we know the mean and SD, and fit our scaling function using the ml_fit() function: 
+
+```{r}
+df <- copy_to(sc, data.frame(value = rnorm(100000))) %>% 
+  ft_vector_assembler(input_cols = "value", 
+                      output_col = "features") #combines multiple vectors into a row vector
+
+scaler_model <- ml_fit(scaler, df)
+
+scaler_model
+
+```
+
+We see that the mean and SD are very close to 0 and 1 which is expected. We can then use the transformer to transform a dataframe using the ml_transform function:
+
+Recall that a pipeline is simply a sequence on transformers and estimators. 
+
+Then a pipeline model is a pipline trained on data so all components have been converted to transformers. We can initialize an empty pipeline with ml_pipeline(sc) and append stages to it. 
+
+Recall that A Transformer is an abstraction that includes feature transformers and learned models. Technically, a Transformer implements a method transform(), which converts one DataFrame into another, generally by appending one or more columns. For example:
+
+A feature transformer might take a DataFrame, read a column (e.g., text), map it into a new column (e.g., feature vectors), and output a new DataFrame with the mapped column appended.
+
+A learning model might take a DataFrame, read the column containing feature vectors, predict the label for each feature vector, and output a new DataFrame with predicted labels appended as a column.
+
+An Estimator abstracts the concept of a learning algorithm or any algorithm that fits or trains on data. Technically, an Estimator implements a method fit(), which accepts a DataFrame and produces a Model, which is a Transformer. For example, a learning algorithm such as LogisticRegression is an Estimator, and calling fit() trains a LogisticRegressionModel, which is a Model and hence a Transformer.
+
+Before beginning we copy mtcars and split them for test and training:  
+
+```{r}
+spark_mtcars <- sdf_copy_to(sc, mtcars, overwrite = TRUE) %>%
+ sdf_random_split(training = 0.4, testing = 0.6)
+
+my_pipeline <- ml_pipeline(sc) %>%
+  ft_binarizer("mpg", "guzzler", 20) %>%
+  ft_r_formula(guzzler ~ wt + cyl) %>%  #Implements transforms req'd for fitting data against R model
+  ml_logistic_regression()
+
+
+my_pipeline
+
+```
+
+Use ml_fit() to train the model, and save the results to the model variable.
+
+```{r}
+model <- ml_fit(my_pipeline, spark_mtcars$training)
+
+model
+```
+
+We can now evaluate the model. ml_transform() would be the equivalent of a predict() function. The command is basically saying take the spark_mtcars$testing dataset and "transform" it using this pipeline, which happens to have a modeling step at the end.
+
+```{r}
+predictions <- ml_transform(x = model, 
+                            dataset = spark_mtcars$testing)
+
+glimpse(predictions)
+
+test_df <- collect(predictions)
+
+library(caret)
+confusionMatrix(data = as.factor(test_df$prediction), reference = as.factor(test_df$guzzler))
+
+```
+
+This model can be saved using the ml_save:
+
+```{r}
+ml_save(model, "new_model", overwrite = TRUE)
+
+```
+
+We're now going to disconnect and see if we can reload the model:
+
+```{r}
+spark_disconnect(sc)
+
+```
+
+We will use a new connection to confirm that the model can be reloaded
+
+```{r}
+sc <- spark_connect(master = "local", version = sparkversion)
+
+spark_mtcars <- sdf_copy_to(sc, mtcars, overwrite = TRUE) 
+
+reload <- ml_load(sc, "new_model")
+
+reload
+
+reload_predictions <- ml_transform(x = reload, 
+                            dataset = spark_mtcars)
+
+glimpse(reload_predictions)
+
+```
+
+
+Activity: 
+- Use a built-in data set in R to perform some basic functions with Sparklyr. 
+- Wrangle and visualize  the data and builld a simple model. Show a partner what you did. 
+
+
