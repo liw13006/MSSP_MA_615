@@ -1,0 +1,183 @@
+---
+title: "Spark in R Tutorial"
+author: "Albert Ding"
+date: "November 12, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Before we do anything, we need to check that Java 8 is installed on your system because Scala which it's built in is run by Java Virtual Machine (JVM). It's likely already installed
+
+```{r}
+system("java -version")
+```
+
+Next, let's install sparklyr from CRAN and spark onto our machines:
+
+```{r}
+install.packages("sparklyr")
+spark_install()
+```
+
+We can verify the the version we're using by running spark_installed_versions()
+
+```{r}
+library(sparklyr)
+spark_installed_versions()
+sparkversion <- spark_installed_versions()$spark
+```
+
+So far we have installed only a local Spark cluster which should be helpful to get started, test code, and troubleshoot with ease. To connect to this local cluster, run the following
+
+```{r}
+sc <- spark_connect(master = "local", version = sparkversion)
+
+```
+
+Now that we're connected, let's run a few simple commands. For instance, let's copy the mtcars dataset into Spark by using copy_to(). We'll see that the dataset appears under connections
+
+```{r}
+cars <- copy_to(sc, mtcars)
+
+```
+
+Most Spark commands are executed from the R console but monitoring and analyzing execution is done through Spark's web interface which you can access as well:
+
+```{r}
+spark_web(sc)
+
+```
+
+On the Storage tab, you'll noticed that this dataset was fully loaded into memory as shown by the Fraction Cached column. 
+
+The Executors tab provides a view of your cluster resources; for local connections you will find one executor active with 2 GB of memory and 384MB for computation
+
+The environments tab lists all of the settings for the Spark application
+
+When using Spark from R to analyze data, you can directly use SQL or dplyr for data manipulation
+
+```{r}
+library(DBI)
+dbGetQuery(sc, "SELECT count(*) FROM mtcars")
+```
+
+
+```{r}
+library(dplyr)
+count(cars) 
+```
+
+Just for fun, let's see which function is faster:
+
+```{r}
+n <- 100
+time1 <- rep(0,n)
+time2 <- rep(0,n)
+for(i in 1:n){
+  start <- Sys.time()
+  dbGetQuery(sc, "SELECT count(*) FROM mtcars")
+  end <- Sys.time()
+  count(cars)
+  end2 <- Sys.time()
+  time1[i] <- end - start
+  time2[i] <- end2 - end
+  #difference[i] <- time1[i] - time2[i] 
+  }
+
+par(mfrow=c(2,1))
+plot(seq(n), time1*1000, 'l', col = "red", xlab="SQL Count Function",ylab = "milliseconds")
+plot(seq(n), time2*1000, 'l', col = "blue", xlab="dplyr Count Function",ylab = "milliseconds")
+
+
+```
+
+This is a pretty counterintuitive result because dplyr converts tasks into SQL statements that are then sent to Spark as we shall see. Someone at the rstudio team would likely be better equipped to explain why this occurred. 
+
+```{r}
+count(cars) %>%
+  show_query()
+```
+
+Let's perform a very simple data analysis example by selecting, sampling, and plotting the cars dataset in Spark. The collect() function allows you to copy data from Spark into R's memory:
+
+```{r}
+library(magrittr)
+
+select(cars, hp, mpg) %>%
+  sample_n(100) %>%
+  collect() %>%
+  plot()
+```
+
+Many modeling functions in R have simple sparklyr analogues for instance linear regression: 
+
+```{r}
+model <- ml_linear_regression(cars, mpg ~ hp)
+model
+
+```
+
+For simplicity, we copied the mtcars data into Spark; however, data is usually not copied into Spark. Instead, data is read from existing sources such as CSV, JSON, JDBC, and more. For illustrative purposes we can export our cars dataset as a CSV file:
+
+```{r}
+spark_write_csv(cars, "cars.csv")
+
+```
+
+We can now check to see that our csv appears in our current working directory and read it back in as we might typically do:
+
+```{r}
+list.files()
+cars <- spark_read_csv(sc, "cars.csv")
+
+```
+
+If we click on our local connection, we can now see a second file called "cars"
+
+In the R environment, cars can be treated as if it were a local Dataframe, so you can use dplyr verbs. For instance, we can find out the mean of all the columns
+
+```{r}
+summarize_all(mtcars, mean)
+```
+
+Here is another example that groups the cars dataset by transmission type. As you can see many of the standard data manipulation tools available to you in R can also be applied in Spark:
+
+```{r}
+mtcars %>%
+  mutate(transmission = ifelse(am == 0, "automatic", "manual")) %>%
+  group_by(transmission) %>%
+  summarise_all(mean)
+
+
+```
+
+SparkSQL is based on Hive's SQL conventions and functions and it's possible to call these functions using dplyr as well. For instance, the percentile() functionretrns the exact percentle of a column in a group by inputting a column name, and either a single percentile value or an arry of percentile values.
+
+```{r}
+summarise(cars, mpg_percentile = percentile(mpg, 0.25))
+
+summarise(cars, mpg_percentile = percentile(mpg, 0.25)) %>%
+  show_query()
+```
+
+You can use the explode() function to seperate Spark's array value results into their own record. To do this, use explode() within a mutate() command and pass the variable containing the results of the percentile operation:
+
+```{r}
+summarise(cars, mpg_percentile = percentile(mpg, array(0.25, 0.5, 0.75))) %>%
+  mutate(mpg_percentile = explode(mpg_percentile))
+
+```
+
+ml_corr allows to calculate the correlation matrix
+```{r}
+ml_corr(cars)
+```
+
+
+```{r}
+spark_disconnect(sc)
+
+```

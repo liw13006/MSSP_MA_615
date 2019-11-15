@@ -1,0 +1,1107 @@
+19/11/13 16:20:16 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+19/11/13 16:20:17 INFO SparkContext: Running Spark version 2.4.3
+19/11/13 16:20:17 INFO SparkContext: Submitted application: sparklyr
+19/11/13 16:20:17 INFO SecurityManager: Changing view acls to: nova
+19/11/13 16:20:17 INFO SecurityManager: Changing modify acls to: nova
+19/11/13 16:20:17 INFO SecurityManager: Changing view acls groups to: 
+19/11/13 16:20:17 INFO SecurityManager: Changing modify acls groups to: 
+19/11/13 16:20:17 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(nova); groups with view permissions: Set(); users  with modify permissions: Set(nova); groups with modify permissions: Set()
+19/11/13 16:20:17 INFO Utils: Successfully started service 'sparkDriver' on port 62220.
+19/11/13 16:20:17 INFO SparkEnv: Registering MapOutputTracker
+19/11/13 16:20:17 INFO SparkEnv: Registering BlockManagerMaster
+19/11/13 16:20:17 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+19/11/13 16:20:17 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+19/11/13 16:20:17 INFO DiskBlockManager: Created local directory at /private/var/folders/sn/0y5pwlbd1xlfng6kk_9x76f00000gn/T/blockmgr-a73a4965-0269-48af-b687-c10f679abe04
+19/11/13 16:20:17 INFO MemoryStore: MemoryStore started with capacity 912.3 MB
+19/11/13 16:20:17 INFO SparkEnv: Registering OutputCommitCoordinator
+19/11/13 16:20:17 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+19/11/13 16:20:17 INFO SparkUI: Bound SparkUI to 127.0.0.1, and started at http://localhost:4040
+19/11/13 16:20:17 INFO SparkContext: Added JAR file:/Users/nova/Library/R/3.6/library/sparklyr/java/sparklyr-2.3-2.11.jar at spark://localhost:62220/jars/sparklyr-2.3-2.11.jar with timestamp 1573680017867
+19/11/13 16:20:17 INFO Executor: Starting executor ID driver on host localhost
+19/11/13 16:20:17 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 62221.
+19/11/13 16:20:17 INFO NettyBlockTransferService: Server created on localhost:62221
+19/11/13 16:20:17 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+19/11/13 16:20:18 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 16:20:18 INFO BlockManagerMasterEndpoint: Registering block manager localhost:62221 with 912.3 MB RAM, BlockManagerId(driver, localhost, 62221, None)
+19/11/13 16:20:18 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 16:20:18 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, localhost, 62221, None)
+19/11/13 16:20:18 INFO SharedState: loading hive config file: file:/Users/nova/spark/spark-2.4.3-bin-hadoop2.7/conf/hive-site.xml
+19/11/13 16:20:18 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/Users/nova/Desktop/MA_615/MA_615/SparklyR/spark-warehouse').
+19/11/13 16:20:18 INFO SharedState: Warehouse path is 'file:/Users/nova/Desktop/MA_615/MA_615/SparklyR/spark-warehouse'.
+19/11/13 16:20:18 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+19/11/13 16:20:20 INFO HiveUtils: Initializing HiveMetastoreConnection version 1.2.1 using Spark classes.
+19/11/13 16:20:20 INFO HiveMetaStore: 0: Opening raw store with implemenation class:org.apache.hadoop.hive.metastore.ObjectStore
+19/11/13 16:20:20 INFO ObjectStore: ObjectStore, initialize called
+19/11/13 16:20:20 INFO Persistence: Property hive.metastore.integral.jdo.pushdown unknown - will be ignored
+19/11/13 16:20:20 INFO Persistence: Property datanucleus.cache.level2 unknown - will be ignored
+19/11/13 16:20:21 INFO ObjectStore: Setting MetaStore object pin classes with hive.metastore.cache.pinobjtypes="Table,StorageDescriptor,SerDeInfo,Partition,Database,Type,FieldSchema,Order"
+19/11/13 16:20:22 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MFieldSchema" is tagged as "embedded-only" so does not have its own datastore table.
+19/11/13 16:20:22 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MOrder" is tagged as "embedded-only" so does not have its own datastore table.
+19/11/13 16:20:22 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MFieldSchema" is tagged as "embedded-only" so does not have its own datastore table.
+19/11/13 16:20:22 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MOrder" is tagged as "embedded-only" so does not have its own datastore table.
+19/11/13 16:20:22 INFO MetaStoreDirectSql: Using direct SQL, underlying DB is DERBY
+19/11/13 16:20:22 INFO ObjectStore: Initialized ObjectStore
+19/11/13 16:20:22 WARN ObjectStore: Version information not found in metastore. hive.metastore.schema.verification is not enabled so recording the schema version 1.2.0
+19/11/13 16:20:22 WARN ObjectStore: Failed to get database default, returning NoSuchObjectException
+19/11/13 16:20:22 INFO HiveMetaStore: Added admin role in metastore
+19/11/13 16:20:22 INFO HiveMetaStore: Added public role in metastore
+19/11/13 16:20:22 INFO HiveMetaStore: No user is added in admin role, since config is empty
+19/11/13 16:20:22 INFO HiveMetaStore: 0: get_all_databases
+19/11/13 16:20:22 INFO audit: ugi=nova	ip=unknown-ip-addr	cmd=get_all_databases	
+19/11/13 16:20:22 INFO HiveMetaStore: 0: get_functions: db=default pat=*
+19/11/13 16:20:22 INFO audit: ugi=nova	ip=unknown-ip-addr	cmd=get_functions: db=default pat=*	
+19/11/13 16:20:22 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MResourceUri" is tagged as "embedded-only" so does not have its own datastore table.
+19/11/13 16:20:22 INFO SessionState: Created HDFS directory: /tmp/hive/nova
+19/11/13 16:20:22 INFO SessionState: Created local directory: /var/folders/sn/0y5pwlbd1xlfng6kk_9x76f00000gn/T/nova
+19/11/13 16:20:22 INFO SessionState: Created local directory: /var/folders/sn/0y5pwlbd1xlfng6kk_9x76f00000gn/T/1eddef72-938d-4e72-beee-8f086f5058dd_resources
+19/11/13 16:20:22 INFO SessionState: Created HDFS directory: /tmp/hive/nova/1eddef72-938d-4e72-beee-8f086f5058dd
+19/11/13 16:20:22 INFO SessionState: Created local directory: /var/folders/sn/0y5pwlbd1xlfng6kk_9x76f00000gn/T/nova/1eddef72-938d-4e72-beee-8f086f5058dd
+19/11/13 16:20:22 INFO SessionState: Created HDFS directory: /tmp/hive/nova/1eddef72-938d-4e72-beee-8f086f5058dd/_tmp_space.db
+19/11/13 16:20:22 INFO HiveClientImpl: Warehouse location for Hive client (version 1.2.2) is file:/Users/nova/Desktop/MA_615/MA_615/SparklyR/spark-warehouse
+19/11/13 16:20:22 INFO HiveMetaStore: 0: get_database: default
+19/11/13 16:20:22 INFO audit: ugi=nova	ip=unknown-ip-addr	cmd=get_database: default	
+19/11/13 16:20:22 INFO HiveMetaStore: 0: get_database: global_temp
+19/11/13 16:20:22 INFO audit: ugi=nova	ip=unknown-ip-addr	cmd=get_database: global_temp	
+19/11/13 16:20:22 WARN ObjectStore: Failed to get database global_temp, returning NoSuchObjectException
+19/11/13 16:20:22 INFO HiveMetaStore: 0: get_database: default
+19/11/13 16:20:22 INFO audit: ugi=nova	ip=unknown-ip-addr	cmd=get_database: default	
+19/11/13 16:20:22 INFO HiveMetaStore: 0: get_database: default
+19/11/13 16:20:22 INFO audit: ugi=nova	ip=unknown-ip-addr	cmd=get_database: default	
+19/11/13 16:20:22 INFO HiveMetaStore: 0: get_tables: db=default pat=*
+19/11/13 16:20:22 INFO audit: ugi=nova	ip=unknown-ip-addr	cmd=get_tables: db=default pat=*	
+19/11/13 16:20:23 INFO CodeGenerator: Code generated in 124.285859 ms
+19/11/13 16:20:23 INFO HiveMetaStore: 0: get_database: default
+19/11/13 16:20:23 INFO audit: ugi=nova	ip=unknown-ip-addr	cmd=get_database: default	
+19/11/13 16:20:23 INFO HiveMetaStore: 0: get_database: default
+19/11/13 16:20:23 INFO audit: ugi=nova	ip=unknown-ip-addr	cmd=get_database: default	
+19/11/13 16:20:23 INFO HiveMetaStore: 0: get_tables: db=default pat=*
+19/11/13 16:20:23 INFO audit: ugi=nova	ip=unknown-ip-addr	cmd=get_tables: db=default pat=*	
+19/11/13 17:41:47 WARN HeartbeatReceiver: Removing executor driver with no recent heartbeats: 2263437 ms exceeds timeout 120000 ms
+19/11/13 17:41:47 ERROR TaskSchedulerImpl: Lost an executor driver (already removed): Executor heartbeat timed out after 2263437 ms
+19/11/13 17:41:47 WARN SparkContext: Killing executors is not supported by current scheduler.
+19/11/13 17:41:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 17:41:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 17:41:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 17:41:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 17:41:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 17:41:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 17:41:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 17:41:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 17:41:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 17:41:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 18:35:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 18:35:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 18:35:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 18:35:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 18:35:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 19:05:12 INFO Executor: Told to re-register on heartbeat
+19/11/13 19:05:12 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 19:05:12 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 19:05:12 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 19:05:12 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 19:05:22 INFO Executor: Told to re-register on heartbeat
+19/11/13 19:05:22 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 19:05:22 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 19:05:22 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 19:05:22 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 19:05:32 INFO Executor: Told to re-register on heartbeat
+19/11/13 19:05:32 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 19:05:32 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 19:05:32 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 19:05:32 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 19:05:42 INFO Executor: Told to re-register on heartbeat
+19/11/13 19:05:42 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 19:05:42 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 19:05:42 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 19:05:42 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 19:05:52 INFO Executor: Told to re-register on heartbeat
+19/11/13 19:05:52 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 19:05:52 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 19:05:52 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 19:05:52 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:08:22 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:08:22 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:08:22 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:08:22 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:08:22 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:08:32 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:08:32 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:08:32 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:08:32 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:08:32 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:08:42 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:08:42 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:08:42 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:08:42 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:08:42 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:08:52 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:08:52 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:08:52 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:08:52 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:08:52 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:09:37 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:09:37 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:09:37 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:09:37 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:09:37 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:09:47 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:09:47 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:09:47 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:09:47 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:09:47 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:15:15 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:15:15 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:15:15 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:15:15 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:15:15 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:19:13 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:19:13 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:19:13 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:19:13 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:19:13 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:20:12 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:20:12 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:20:12 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:20:12 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:20:12 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:20:20 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:20:20 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:20:20 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:20:20 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:20:20 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:23:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:23:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:23:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:23:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:23:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:24:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:24:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:24:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:24:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:24:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:24:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:24:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:24:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:24:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:24:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:24:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:24:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:24:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:24:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:24:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:24:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:24:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:24:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:24:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:25:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:25:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:25:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:25:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:25:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:25:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:25:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:25:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:25:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:25:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:25:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:25:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:25:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:25:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:25:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:25:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:25:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:25:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:25:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:26:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:26:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:26:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:26:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:26:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:26:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:26:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:26:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:26:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:26:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:26:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:26:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:26:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:26:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:26:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:26:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:26:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:26:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:26:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:27:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:27:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:27:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:27:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:27:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:27:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:27:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:27:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:27:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:27:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:27:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:27:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:27:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:27:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:27:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:27:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:27:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:27:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:27:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:28:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:28:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:28:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:28:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:28:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:28:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:28:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:28:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:28:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:28:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:28:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:28:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:28:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:28:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:28:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:28:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:28:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:28:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:28:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:29:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:29:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:29:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:29:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:29:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:29:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:29:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:29:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:29:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:29:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:29:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:29:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:29:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:29:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:29:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:29:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:29:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:29:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:29:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:30:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:30:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:30:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:30:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:30:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:30:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:30:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:30:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:30:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:30:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:30:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:30:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:30:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:30:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:30:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:30:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:30:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:30:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:30:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:31:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:31:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:31:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:31:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:31:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:31:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:31:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:31:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:31:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:31:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:31:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:31:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:31:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:31:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:31:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:31:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:31:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:31:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:31:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:32:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:32:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:32:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:32:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:32:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:32:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:32:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:32:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:32:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:32:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:32:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:32:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:32:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:32:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:32:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:32:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:32:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:32:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:32:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:33:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:33:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:33:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:33:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:33:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:33:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:33:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:33:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:33:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:33:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:33:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:33:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:33:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:33:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:33:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:33:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:33:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:33:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:33:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:34:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:34:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:34:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:34:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:34:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:34:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:34:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:34:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:34:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:34:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:34:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:34:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:34:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:34:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:34:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:34:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:34:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:34:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:34:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:35:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:35:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:35:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:35:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:35:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:35:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:35:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:35:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:35:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:35:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:35:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:35:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:35:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:35:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:35:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:35:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:35:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:35:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:35:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:36:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:36:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:36:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:36:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:36:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:36:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:36:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:36:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:36:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:36:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:36:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:36:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:36:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:36:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:36:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:36:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:36:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:36:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:36:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:37:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:37:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:37:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:37:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:37:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:37:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:37:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:37:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:37:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:37:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:37:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:37:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:37:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:37:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:37:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:37:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:37:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:37:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:37:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:38:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:38:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:38:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:38:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:38:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:38:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:38:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:38:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:38:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:38:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:38:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:38:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:38:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:38:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:38:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:38:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:38:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:38:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:38:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:39:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:39:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:39:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:39:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:39:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:39:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:39:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:39:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:39:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:39:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:39:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:39:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:39:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:39:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:39:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:39:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:39:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:39:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:39:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:40:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:40:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:40:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:40:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:40:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:40:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:40:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:40:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:40:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:40:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:40:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:40:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:40:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:40:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:40:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:40:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:40:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:40:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:40:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:41:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:41:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:41:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:41:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:41:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:41:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:41:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:41:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:41:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:41:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:41:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:41:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:41:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:41:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:41:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:41:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:41:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:41:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:41:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:42:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:42:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:42:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:42:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:42:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:42:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:42:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:42:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:42:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:42:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:42:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:42:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:42:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:42:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:42:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:42:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:42:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:42:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:42:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:43:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:43:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:43:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:43:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:43:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:43:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:43:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:43:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:43:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:43:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:43:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:43:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:43:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:43:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:43:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:43:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:43:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:43:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:43:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:44:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:44:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:44:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:44:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:44:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:44:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:44:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:44:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:44:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:44:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:44:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:44:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:44:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:44:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:44:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:44:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:44:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:44:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:44:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:45:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:45:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:45:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:45:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:45:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:45:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:45:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:45:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:45:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:45:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:45:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:45:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:45:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:45:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:45:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:45:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:45:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:45:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:45:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:46:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:46:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:46:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:46:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:46:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:46:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:46:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:46:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:46:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:46:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:46:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:46:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:46:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:46:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:46:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:46:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:46:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:46:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:46:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:47:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:47:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:47:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:47:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:47:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:47:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:47:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:47:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:47:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:47:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:47:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:47:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:47:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:47:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:47:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:47:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:47:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:47:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:47:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:48:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:48:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:48:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:48:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:48:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:48:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:48:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:48:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:48:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:48:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:48:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:48:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:48:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:48:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:48:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:48:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:48:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:48:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:48:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:49:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:49:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:49:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:49:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:49:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:49:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:49:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:49:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:49:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:49:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:49:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:49:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:49:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:49:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:49:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:49:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:49:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:49:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:49:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:50:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:50:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:50:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:50:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:50:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:50:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:50:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:50:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:50:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:50:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:50:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:50:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:50:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:50:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:50:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:50:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:50:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:50:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:50:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:51:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:51:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:51:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:51:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:51:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:51:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:51:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:51:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:51:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:51:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:51:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:51:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:51:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:51:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:51:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:51:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:51:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:51:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:51:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:52:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:52:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:52:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:52:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:52:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:52:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:52:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:52:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:52:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:52:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:52:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:52:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:52:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:52:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:52:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:52:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:52:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:52:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:52:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:53:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:53:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:53:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:53:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:53:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:53:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:53:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:53:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:53:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:53:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:53:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:53:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:53:49 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:53:49 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:53:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:49 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:53:59 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:53:59 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:53:59 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:59 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:53:59 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:54:09 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:54:09 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:54:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:54:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:54:09 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:54:19 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:54:19 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:54:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:54:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:54:19 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:54:29 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:54:29 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:54:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:54:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:54:29 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:54:39 INFO Executor: Told to re-register on heartbeat
+19/11/13 20:54:39 INFO BlockManager: BlockManager BlockManagerId(driver, localhost, 62221, None) re-registering with master
+19/11/13 20:54:39 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:54:39 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 62221, None)
+19/11/13 20:54:39 INFO BlockManager: Reporting 0 blocks to the master.
+19/11/13 20:54:41 INFO SparkContext: Invoking stop() from shutdown hook
+19/11/13 20:54:41 INFO SparkUI: Stopped Spark web UI at http://localhost:4040
+19/11/13 20:54:41 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+19/11/13 20:54:41 INFO MemoryStore: MemoryStore cleared
+19/11/13 20:54:41 INFO BlockManager: BlockManager stopped
+19/11/13 20:54:41 INFO BlockManagerMaster: BlockManagerMaster stopped
+19/11/13 20:54:41 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+19/11/13 20:54:41 INFO SparkContext: Successfully stopped SparkContext
+19/11/13 20:54:41 INFO ShutdownHookManager: Shutdown hook called
+19/11/13 20:54:41 INFO ShutdownHookManager: Deleting directory /private/var/folders/sn/0y5pwlbd1xlfng6kk_9x76f00000gn/T/spark-93862ea6-6735-42a8-a364-0937847f2995
+19/11/13 20:54:41 INFO ShutdownHookManager: Deleting directory /private/var/folders/sn/0y5pwlbd1xlfng6kk_9x76f00000gn/T/spark-6e9256ef-698a-41ec-a2c6-e97af48d7b79
