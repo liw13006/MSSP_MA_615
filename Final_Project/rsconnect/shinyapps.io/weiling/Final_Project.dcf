@@ -1,0 +1,13 @@
+name: Final_Project
+title: Final_Project
+username:
+account: weiling
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1605474
+bundleId: 2674130
+url: https://weiling.shinyapps.io/Final_Project/
+when: 1576546370.45453
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Preliminary_doc/Preliminary_doc.pdf|Preliminary_doc/Preliminary_doc.Rmd

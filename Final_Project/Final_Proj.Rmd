@@ -1,0 +1,269 @@
+---
+title: "Restaurant Spatial Distribution"
+author: "Weiling Li"
+date: "12/16/2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,message = FALSE,warning = FALSE)
+library(leaflet)
+library(htmltools)
+library(tidyverse)
+library(geosphere)
+library(shiny)
+library(shinydashboard)
+library(DT)
+library(magrittr)
+source("./EDA.R")
+```
+
+## Introduction | The Problem {.smaller}
+
+People in major cities tend to live in clusters somewhat defined by their **root** cultures.<br/>
+One could imagine that under this settings, you can expected to find that restaurants will also clustered, but do they?
+
+* Do restaurants really exhibit a geospatial clustering by genre?
+
+* Does the rating of restaurants also clustered geospatially?
+
+
+## Introduction | The method {.smaller}
+
+* [**Yelp Fusion**](https://www.yelp.com/developers/documentation/v3/business_search) api was used to pull data from *Yelp.com*
+  - This project ultilized the *yelpr* package and have made own modified functions to efficiently request data from Yelp Fusion base on **location** and **genre**.
+  
+* [**Gaussian Mixture Model**](https://en.wikipedia.org/wiki/Mixture_model) was used to calculate the geospatial clusters exhibit by the restaurants under the same genre
+  - The actual implementation was fulfilled by [**mclust**](https://cran.r-project.org/web/packages/mclust/index.html) package on CRAN.
+
+* [**Leaflet**](https://rstudio.github.io/leaflet/) package was used to render all the maps in this project.
+
+* Specail thanks to [Samuel Luo](https://github.com/xiaohusai/) for helping with shiny app implementation.
+
+## Data Wrangling | The Scope {.smaller}
+
+* Two Major Cities:
+  - Boston
+  - San Francisco
+
+* Two Biggest Genre:
+  - Chinese
+  - Italian
+  
+* After Initial Wrangling(*source code* can be found in *"./data/data_acquisition.R"*)
+  - 640 restaurant from the city of Boston
+  - 1440 restaurants from the city of San Francisco
+
+## Data Wrangling | Original Data {.smaller}
+
+After gathering data from Yelp.com, the original dataset contains 22 column.<br/>
+
+For this project, we mainly focused on:
+
+* **Coordinates** of the restaurant
+* **Ratings** of the restaurant
+
+At first, reviews are also considered to perform text mining and text analysis. However, The Yelp api can only return the top 3 reviews of a given restaurant and each reviews are trimmed to the 1st 160 characters including space. After a few try, it is almost no point at all to do the text analysis since at this level, the text sentiment is highly bias towards the 5 star ratings.
+
+## EDA | Initial plots of the data
+
+Visualizing these data on a map will give you very little idea of how the clustered:<br/>
+
+---
+
+**Boston**
+```{r}
+map_bs_unclus
+```
+
+---
+
+**San Francisco**
+```{r}
+map_sf_unclus
+```
+
+
+## EDA | Look at the distribution
+
+To get a sense of the overall performance of both cites, we examine the distribution of their ratings as well as the distance towards the city center.
+
+---
+
+```{r}
+hist_bs_rating
+
+```
+
+---
+
+```{r}
+hist_sf_rating
+```
+
+First glance showed that the distribution of ratings is very similar among the two cities
+
+## EDA | Look at the distribution
+
+If we look at the distribution of distance towards the city center factored by ratings, we will find out that the two cities differ in a interesting way.
+
+---
+
+**Boston**
+```{r}
+hist_bs_rat_dist
+
+```
+
+---
+
+**San Francisco**
+
+```{r}
+hist_sf_rat_dist
+```
+
+In Boston, for both Italian and Chinese Restaurants, when approaching to the city center, food tends to be ",strong("Okay"),". When moving away from the city center, it becames harder to determine whether it is actually good or not.<br/>
+
+In San Francisco, Chinese food seems to get better when you approaching towards the city center while Italian food's quality stays roughly the same
+
+## Clustering | Apply Gaussian Mixture
+
+Gaussian Mixture model was widely used to do clustering analysis. Not only can it provide a soft boundary assignment but can also detect a highly concentrated anomaly with in a cluster.<br/>
+
+Below are the results given by **mclust** package
+
+---
+
+**Boston Chinese Restaurant Clustering**
+
+```{r}
+mclust::mclust2Dplot(data = coor_bs_cn,parameters = boston_gm_cn$parameters,z = boston_gm_cn$z,classification = boston_gm_cn$classification,what = "classification",main = F)
+```
+
+---
+
+**Boston Italian Restaurant Clustering**
+
+```{r}
+mclust::mclust2Dplot(data = coor_bs_it,parameters = boston_gm_it$parameters,z = boston_gm_it$z,classification = boston_gm_it$classification,what = "classification",main = F)
+```
+
+
+---
+
+**San Francisco Chinese Restaurant Clustering**
+
+```{r}
+mclust::mclust2Dplot(data = coor_sf_cn,parameters = sf_gm_cn$parameters,z = sf_gm_cn$z,classification = sf_gm_cn$classification,what = "classification",main = F)
+```
+
+
+---
+
+**San Francisco Italian Restaurant Clustering**
+
+```{r}
+mclust::mclust2Dplot(data = coor_sf_it,parameters = sf_gm_it$parameters,z = sf_gm_it$z,classification = sf_gm_it$classification,what = "classification",main = F)
+```
+
+
+## Clustering | Results
+
+As can be seen in the plots, there are highly concentrated areas with in the cluster, The small blue cluster in the Boston Chinese Restaurant map is actually the Chinatown area. Also from the Italian restaurant cluster map, North End also has a really high concentration of Italian restaurants.
+
+If we plot these clusters on the map, it would be clearer what part of the city these cluster belongs to.
+
+---
+
+**Boston**
+
+Restaurants are clickable. Toggle base layer to 'None' to observe the cluster. Cursor on object will provide more information
+```{r}
+bs_map_test
+```
+
+---
+
+**San Francisco**
+
+Restaurants are clickable. Toggle base layer to 'None' to observe the cluster. Cursor on object will provide more information
+```{r}
+sf_map_test
+```
+
+## Analysis | Rating by cluster
+
+Based on the clustering we could re-examine the distribution of ratings conditioned on the cluster.
+
+---
+
+**Boston Chinese Restaurant**
+```{r}
+bs_rating_cn
+```
+
+---
+
+**Boston Italian Restaurant**
+```{r}
+bs_rating_it
+```
+
+---
+
+**San Francisco Chinese Restaurant**
+```{r}
+sf_rating_cn
+```
+
+---
+
+**San Francisco Italian Restaurant**
+```{r}
+sf_rating_it
+```
+
+## Analysis | Distance to Cluster Center by Rating
+
+One interesting observation is that in Boston, Chinatown is actually not a very good place to eat Chinese food, The furthest cluster: "Allston" on the other hand is a much better place to have Chinese food. However, when you consider Italian food, North End is actually a good choice.
+
+We could also analyse the distribution of restaurants to its cluster center separated by ratings. Because the cluster itself varies in radius. The relative distance are calculated by dividing the distance by the standard deviation within its cluster.
+
+---
+
+**Boston Chinese Restaurant**
+```{r}
+bs_dist_cn+ylab("Relative Distance")
+```
+
+---
+
+**Boston Italian Restaurant**
+```{r}
+bs_dist_it+ylab("Relative Distance")
+```
+
+---
+
+**San Francisco Chinese Restaurant**
+```{r}
+sf_dist_cn+ylab("Relative Distance")
+```
+
+----
+
+**San Francisco Italian Restaurant**
+```{r}
+sf_dist_it+ylab("Relative Distance")
+```
+
+
+## Conclusion | Results Analysis
+
+As we can see from the map and plots, restaurants are highly clustered in both city: Boston and San Francisco. However, unlike what people normally thought, the best place for the authentic cuisine might not always be at the place where the specific demographic group lives.(In boston, turns out that Allston has the best Chinese food when Chinatown on the other hand, has the lowest ratings).
+
+## Conclusion | Speculation
+
+One speculation is that, the demand for authentic food might actually driven by the concentration of international population in the city. Also take Boston as an Example. The highest concentration of Chinese population(excluding American born Chinese) might actually be at Allston because of the Boston University! Chinese student population here might actually be the driven force of the authenticity of foods which resembles their home on the other side of the Earth.
+
